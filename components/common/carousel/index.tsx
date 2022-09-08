@@ -5,19 +5,24 @@ import ArrowNav from "./children/ArrowNav";
 
 interface CarouselProps {
     images: string[];
-    slideInterval: number;
     slideHeight: string;
+    slideInterval: number;
+    backgroundColor: string;
 }
 
 let count = 0;
 
-function Carousel({ images, slideInterval, slideHeight }: CarouselProps) {
+function Carousel({
+    images,
+    slideInterval,
+    slideHeight,
+    backgroundColor,
+}: CarouselProps) {
     const [currentIndex, setCurrentIndex] = useState(0);
 
     function handleArrow(direction: string) {
         if (direction === "l") {
-            const imgLen = images.length;
-            count = (currentIndex + imgLen - 1) % imgLen;
+            count = (currentIndex + images.length - 1) % images.length;
         }
 
         if (direction === "r") {
@@ -39,20 +44,29 @@ function Carousel({ images, slideInterval, slideHeight }: CarouselProps) {
 
     return (
         <div
-            className={`relative -ml-[7.7%] h-[${slideHeight}] w-screen overflow-hidden bg-gray-100`}
+            className={`relative h-[${slideHeight}] w-screen overflow-hidden ${backgroundColor}`}
         >
             <ArrowNav style={{ left: 0 }} onClick={() => handleArrow("l")}>
                 <AiOutlineLeft />
             </ArrowNav>
-            <div className="flex w-screen transition duration-700 ease-in-out md:h-full">
-                <div className="aspect-auto">
-                    <Image
-                        src={images[currentIndex]}
-                        alt=""
-                        layout="fill"
-                        objectFit="cover"
-                    />
-                </div>
+            {/* Wrapper */}
+            <div
+                className={`flex h-full w-[${
+                    images.length * 100
+                }vw] transform transition-all duration-[1.5s] ease-in-out`}
+                style={{ transform: `translateX(${-100 * currentIndex}vw)` }}
+            >
+                {images.map((img, i) => (
+                    // Image container
+                    <div key={i} className="relative h-full w-screen">
+                        <Image
+                            src={img}
+                            alt=""
+                            layout="fill"
+                            objectFit="contain"
+                        />
+                    </div>
+                ))}
             </div>
             <ArrowNav style={{ right: 0 }} onClick={() => handleArrow("r")}>
                 <AiOutlineRight />
