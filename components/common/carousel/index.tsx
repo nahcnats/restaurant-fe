@@ -32,15 +32,15 @@ function Carousel({
         setCurrentIndex(count);
     }
 
-    useEffect(() => {
-        const intervalId = setInterval(() => {
-            handleArrow("r");
-        }, slideInterval);
+    // useEffect(() => {
+    //     const intervalId = setInterval(() => {
+    //         handleArrow("r");
+    //     }, slideInterval);
 
-        return () => {
-            clearInterval(intervalId);
-        };
-    }, [handleArrow]);
+    //     return () => {
+    //         clearInterval(intervalId);
+    //     };
+    // }, [handleArrow]);
 
     return (
         <div
@@ -63,7 +63,7 @@ function Carousel({
                             src={img}
                             alt=""
                             layout="fill"
-                            objectFit="contain"
+                            objectFit="cover"
                         />
                     </div>
                 ))}

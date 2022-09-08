@@ -1,20 +1,24 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/router";
+import { TiShoppingCart } from "react-icons/ti";
 
 const itemsLeft = [
     { label: "Homepage", url: "/" },
-    { label: "Products", url: "/" },
-    { label: "Menu", url: "/" },
+    { label: "Products", url: "#" },
+    { label: "Menu", url: "#" },
 ];
 
 const itemsRight = [
-    { label: "Events", url: "/" },
-    { label: "Blog", url: "/" },
-    { label: "Contact", url: "/" },
+    { label: "Events", url: "#" },
+    { label: "Blog", url: "#" },
+    { label: "Contact", url: "#" },
 ];
 
 function Header() {
+    const router = useRouter();
+
     return (
         <header className="sticky top-0 z-50">
             <div className="flex h-[100px] w-full items-center justify-between bg-primary px-8">
@@ -40,7 +44,13 @@ function Header() {
                         {itemsLeft.map((item, index) => (
                             <li key={index}>
                                 <Link href={item.url} passHref>
-                                    <a className="font-500 text-white">
+                                    <a
+                                        className={`font-500 header-link ${
+                                            router.pathname === item.url
+                                                ? "text-gray-300"
+                                                : "text-white"
+                                        }`}
+                                    >
                                         {item.label}
                                     </a>
                                 </Link>
@@ -59,7 +69,13 @@ function Header() {
                         {itemsRight.map((item, index) => (
                             <li key={index}>
                                 <Link href={item.url} passHref>
-                                    <a className="font-500 text-white">
+                                    <a
+                                        className={`font-500 header-link ${
+                                            router.pathname === item.url
+                                                ? "text-gray-300"
+                                                : "text-white"
+                                        }`}
+                                    >
                                         {item.label}
                                     </a>
                                 </Link>
@@ -69,17 +85,24 @@ function Header() {
                 </div>
 
                 <div className="flex flex-1 justify-end">
-                    <div className="aspect-auto relative h-6 w-6">
-                        <Image
-                            src="/images/cart.png"
-                            alt="logo"
-                            layout="fill"
-                            objectFit="cover"
-                        />
-                        <div className="absolute -top-3 -right-3 flex h-5 w-5 items-center justify-center rounded-full bg-white text-xs text-primary">
-                            0
-                        </div>
-                    </div>
+                    <button className="aspect-auto relative h-6 w-6">
+                        <Link href="/cart" passHref>
+                            <>
+                                <a
+                                    className={`font-500 header-link ${
+                                        router.pathname === "/cart"
+                                            ? "text-gray-300"
+                                            : "text-white"
+                                    }`}
+                                >
+                                    <TiShoppingCart className="text-[28px]" />
+                                </a>
+                                <div className="absolute -top-3 -right-3 flex h-5 w-5 items-center justify-center rounded-full bg-white text-xs text-primary">
+                                    0
+                                </div>
+                            </>
+                        </Link>
+                    </button>
                 </div>
             </div>
         </header>
