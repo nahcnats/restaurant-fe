@@ -88,13 +88,7 @@ function Header() {
                     <button className="aspect-auto relative h-6 w-6">
                         <Link href="/cart" passHref>
                             <>
-                                <a
-                                    className={`font-500 header-link ${
-                                        router.pathname === "/cart"
-                                            ? "text-gray-300"
-                                            : "text-white"
-                                    }`}
-                                >
+                                <a className="font-500 header-link text-white">
                                     <TiShoppingCart className="text-[28px]" />
                                 </a>
                                 <div className="absolute -top-3 -right-3 flex h-5 w-5 items-center justify-center rounded-full bg-white text-xs text-primary">
