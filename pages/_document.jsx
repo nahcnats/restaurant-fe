@@ -5,10 +5,7 @@ export default function Document() {
         <Html>
             <Head>
                 <link rel="icon" href="/favicon.ico" />
-                <meta
-                    name="description"
-                    meta="Best pizza shop in Klang Valley"
-                />
+                <meta name="description" content="Best pizza shop in town" />
             </Head>
             <body>
                 <Main />

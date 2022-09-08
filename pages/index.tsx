@@ -1,7 +1,7 @@
 import type { NextPage } from "next";
 import Layout from "../components/common/Layout";
 import Carousel from "../components/common/carousel";
-import PizzaList from "../components/PizzaList";
+import PizzaList from "../components/home/PizzaList";
 
 const images = [
     "/images/featured.png",
@@ -18,6 +18,7 @@ const HomePage: NextPage = () => {
                 slideHeight="calc(100vh-100px)"
                 backgroundColor="bg-primary"
             />
+
             <PizzaList />
         </Layout>
     );

@@ -36,7 +36,7 @@ function Header() {
                 </div>
 
                 <div className="flew-row flex-5 flex items-center justify-center">
-                    <ul className="flex list-none items-center gap-8 p-0">
+                    <ul className="hidden list-none items-center gap-8 p-0 md:flex">
                         {itemsLeft.map((item, index) => (
                             <li key={index}>
                                 <Link href={item.url} passHref>
