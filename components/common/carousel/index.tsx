@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import { AiOutlineLeft, AiOutlineRight } from "react-icons/ai";
 import ArrowNav from "./children/ArrowNav";
-import styles from "../../../styles/carousel.module.css";
+// import styles from "../../../styles/carousel.module.css";
 
 interface CarouselProps {
     images: string[];
