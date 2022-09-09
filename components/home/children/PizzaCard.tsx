@@ -3,7 +3,7 @@ import React from "react";
 
 function PizzaCard() {
     return (
-        <div className="flex w-full cursor-pointer flex-col items-center justify-center rounded-lg border border-gray-100 p-20 shadow-lg">
+        <div className="card flex w-full cursor-pointer flex-col items-center justify-center  p-20">
             <Image src="/images/pizza.png" alt="" width="500" height="500" />
             <h1 className="my-4 text-lg font-bold text-primary">
                 FIORI DI ZUCCA

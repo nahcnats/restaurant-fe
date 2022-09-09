@@ -14,6 +14,18 @@ body {
         Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
 }
 
+a:hover {
+    @apply text-accent;
+}
+
 .header-link {
     @apply hover:text-amber-500;
+}
+
+.card {
+    @apply rounded-lg border border-gray-100 shadow-lg;
+}
+
+.primary-button {
+    @apply rounded bg-primary py-2 px-4 font-[500] text-white shadow hover:text-gray-200;
 }
