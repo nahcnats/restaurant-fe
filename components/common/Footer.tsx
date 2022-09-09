@@ -29,24 +29,26 @@ const operatingHours = [
 
 function Footer() {
     return (
-        // <footer className="flex h-[100vh-100px] bg-gray-900">
-        <footer className="grid h-[100vh-100px] w-full grid-cols-1 bg-gray-900 md:grid-cols-2">
-            <div className="relative hidden md:block">
-                <Image
-                    src="/images/bg.png"
-                    alt=""
-                    layout="fill"
-                    objectFit="cover"
-                />
-            </div>
-            <div className="relative mt-4 grid grid-cols-1 md:mt-0 md:grid-cols-3">
-                <div className="flex-1 p-5 md:col-start-1 md:col-end-2">
+        <footer className="h-[100vh-100px] w-screen bg-gray-900">
+            <div className="grid grid-cols-1 md:grid-cols-5">
+                <div className="md:col-span-2">
+                    <div className="relative">
+                        <Image
+                            src="/images/bg.png"
+                            alt=""
+                            layout="responsive"
+                            width={640}
+                            height={640}
+                        />
+                    </div>
+                </div>
+                <div className="p-4">
                     <h2 className="text-lg font-bold text-gray-300">
                         OH YES, WE DID. THE LAMA PIZZA, WELL BAKED SLICE OF
                         PIZZA
                     </h2>
                 </div>
-                <div className="mb-4 flex-1 p-5">
+                <div className="p-4">
                     <h1 className="mb-4 text-base font-bold text-accent">
                         FIND OUR RESTAURANTS
                     </h1>
@@ -62,7 +64,7 @@ function Footer() {
                         </p>
                     ))}
                 </div>
-                <div className="flex-1 p-5">
+                <div className="p-4">
                     <h1 className="mb-4 text-base font-bold text-accent">
                         WORKING HOURS
                     </h1>

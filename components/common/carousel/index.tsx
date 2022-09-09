@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import { AiOutlineLeft, AiOutlineRight } from "react-icons/ai";
 import ArrowNav from "./children/ArrowNav";
+import styles from "../../../styles/carousel.module.css";
 
 interface CarouselProps {
     images: string[];
@@ -19,6 +20,8 @@ function Carousel({
     backgroundColor,
 }: CarouselProps) {
     const [currentIndex, setCurrentIndex] = useState(0);
+    const maxSlideWidth = images.length * 100;
+    const slideWidth = `w-[${String(maxSlideWidth)}vw]`;
 
     function handleArrow(direction: string) {
         if (direction === "l") {
@@ -32,38 +35,39 @@ function Carousel({
         setCurrentIndex(count);
     }
 
-    // useEffect(() => {
-    //     const intervalId = setInterval(() => {
-    //         handleArrow("r");
-    //     }, slideInterval);
+    useEffect(() => {
+        const intervalId = setInterval(() => {
+            handleArrow("r");
+        }, slideInterval);
 
-    //     return () => {
-    //         clearInterval(intervalId);
-    //     };
-    // }, [handleArrow]);
+        return () => {
+            clearInterval(intervalId);
+        };
+    }, [handleArrow]);
 
     return (
         <div
-            className={`relative h-[${slideHeight}] w-screen overflow-hidden ${backgroundColor}`}
+            className={`relative ${slideHeight} w-screen overflow-hidden ${backgroundColor}`}
         >
             <ArrowNav style={{ left: 0 }} onClick={() => handleArrow("l")}>
                 <AiOutlineLeft />
             </ArrowNav>
-            {/* Wrapper */}
             <div
-                className={`flex h-full w-[${
-                    images.length * 100
-                }vw] transform transition-all duration-[1.5s] ease-in-out`}
+                // className={styles.wrapper}
+                className={`flex h-full ${slideWidth} transition-all duration-1000 ease-in-out`}
                 style={{ transform: `translateX(${-100 * currentIndex}vw)` }}
             >
                 {images.map((img, i) => (
-                    // Image container
-                    <div key={i} className="relative h-full w-screen">
+                    <div
+                        // className={styles.imgContainer}
+                        className="relative h-full w-full"
+                        key={i}
+                    >
                         <Image
                             src={img}
                             alt=""
                             layout="fill"
-                            objectFit="cover"
+                            objectFit="contain"
                         />
                     </div>
                 ))}
