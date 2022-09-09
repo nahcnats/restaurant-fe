@@ -6,22 +6,14 @@ import styles from "../../../styles/carousel.module.css";
 
 interface CarouselProps {
     images: string[];
-    slideHeight: string;
     slideInterval: number;
     backgroundColor: string;
 }
 
 let count = 0;
 
-function Carousel({
-    images,
-    slideInterval,
-    slideHeight,
-    backgroundColor,
-}: CarouselProps) {
+function Carousel({ images, slideInterval, backgroundColor }: CarouselProps) {
     const [currentIndex, setCurrentIndex] = useState(0);
-    const maxSlideWidth = images.length * 100;
-    const slideWidth = `w-[${String(maxSlideWidth)}vw]`;
 
     function handleArrow(direction: string) {
         if (direction === "l") {
@@ -47,14 +39,16 @@ function Carousel({
 
     return (
         <div
-            className={`relative ${slideHeight} w-screen overflow-hidden ${backgroundColor}`}
+            className={`relative h-[50vh] w-screen overflow-hidden md:h-[calc(100vh-100px)] ${backgroundColor}`}
         >
             <ArrowNav style={{ left: 0 }} onClick={() => handleArrow("l")}>
                 <AiOutlineLeft />
             </ArrowNav>
             <div
                 // className={styles.wrapper}
-                className={`flex h-full ${slideWidth} transition-all duration-1000 ease-in-out`}
+                className={`flex h-full w-[${
+                    images.length * 100
+                }vw] transition-all duration-1000 ease-in-out`}
                 style={{ transform: `translateX(${-100 * currentIndex}vw)` }}
             >
                 {images.map((img, i) => (

@@ -15,7 +15,6 @@ const HomePage: NextPage = () => {
             <Carousel
                 images={images}
                 slideInterval={3000}
-                slideHeight="h-[calc(100vh-100px)]"
                 backgroundColor="bg-primary"
             />
             <PizzaList />
