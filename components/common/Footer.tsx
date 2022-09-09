@@ -69,7 +69,7 @@ function Footer() {
                         WORKING HOURS
                     </h1>
                     {operatingHours.map((wh, i) => (
-                        <p className="mb-4 text-sm text-gray-400">
+                        <p key={i} className="mb-4 text-sm text-gray-400">
                             {wh.days}
                             <br />
                             {wh.hours}

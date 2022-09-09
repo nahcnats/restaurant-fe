@@ -85,8 +85,8 @@ function Header() {
                 </div>
 
                 <div className="flex flex-1 justify-end">
-                    <button className="aspect-auto relative h-6 w-6">
-                        <Link href="/cart" passHref>
+                    <Link href="/cart" passHref>
+                        <button className="aspect-auto relative h-6 w-6">
                             <>
                                 <a className="font-500 header-link text-white">
                                     <TiShoppingCart className="text-[28px]" />
@@ -95,8 +95,8 @@ function Header() {
                                     0
                                 </div>
                             </>
-                        </Link>
-                    </button>
+                        </button>
+                    </Link>
                 </div>
             </div>
         </header>

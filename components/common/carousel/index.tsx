@@ -46,10 +46,11 @@ function Carousel({ images, slideInterval, backgroundColor }: CarouselProps) {
             </ArrowNav>
             <div
                 // className={styles.wrapper}
-                className={`flex h-full w-[${
-                    images.length * 100
-                }vw] transition-all duration-1000 ease-in-out`}
-                style={{ transform: `translateX(${-100 * currentIndex}vw)` }}
+                className={`flex h-full transition-all duration-1000 ease-in-out`}
+                style={{
+                    width: `${images.length * 100}vw`,
+                    transform: `translateX(${-100 * currentIndex}vw)`,
+                }}
             >
                 {images.map((img, i) => (
                     <div
