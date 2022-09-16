@@ -35,7 +35,7 @@ function Carousel({ images, slideInterval, backgroundColor }: CarouselProps) {
         return () => {
             clearInterval(intervalId);
         };
-    }, [handleArrow]);
+    }, [handleArrow, slideInterval]);
 
     return (
         <div

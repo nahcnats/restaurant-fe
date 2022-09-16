@@ -83,7 +83,7 @@ function OrderPage() {
                     </table>
                     <div className="mt-6 flex w-full justify-between md:w-[80%]">
                         {statuses.map((item, index) => (
-                            <div className={statusClass(index)}>
+                            <div key={index} className={statusClass(index)}>
                                 <Image
                                     src={item.image}
                                     alt={item.name}
