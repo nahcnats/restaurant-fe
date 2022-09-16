@@ -29,3 +29,7 @@ a:hover {
 .primary-button {
     @apply rounded bg-primary py-2 px-4 font-[500] text-white shadow hover:text-gray-200;
 }
+
+.secondary-button {
+    @apply rounded bg-teal-500 py-2 px-4 font-[500] text-white shadow hover:text-gray-200;
+}
