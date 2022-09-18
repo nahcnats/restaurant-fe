@@ -53,8 +53,6 @@ function ProductPage({ product }: { product: ProductProps }) {
         }
     }
 
-    console.log(extras);
-
     return (
         <Layout title={product.title}>
             <div className="mt-12 grid h-[calc(100vh-100px)] grid-cols-1 md:grid-cols-2">
