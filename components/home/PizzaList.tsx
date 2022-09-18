@@ -1,7 +1,7 @@
-import React from "react";
 import PizzaCard from "./children/PizzaCard";
+import { ProductProps } from "../../utils/types";
 
-function PizzaList() {
+function PizzaList({ products }: { products: Array<ProductProps> }) {
     return (
         <section className="flex flex-col items-center py-5 px-8">
             <h1 className="mb-4 text-3xl font-bold">THE BEST PIZZA IN TOWN</h1>
@@ -15,8 +15,8 @@ function PizzaList() {
                 magni obcaecati modi omnis.
             </p>
             <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
-                {[1, 2, 3, 4, 5, 6].map((item, i) => (
-                    <PizzaCard key={i} />
+                {products.map((item) => (
+                    <PizzaCard key={item._id} item={item} />
                 ))}
             </div>
         </section>
