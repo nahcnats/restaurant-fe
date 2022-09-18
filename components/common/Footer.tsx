@@ -30,7 +30,7 @@ function Footer() {
     return (
         <footer className="h-[100vh-100px] w-screen bg-gray-900">
             <div className="grid grid-cols-1 md:grid-cols-5">
-                <div className="md:col-span-2">
+                <div className="hidden md:col-span-2 md:grid">
                     <div className="relative">
                         <Image
                             src="/images/bg.png"

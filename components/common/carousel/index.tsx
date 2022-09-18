@@ -1,8 +1,7 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import Image from "next/image";
 import { AiOutlineLeft, AiOutlineRight } from "react-icons/ai";
 import ArrowNav from "./children/ArrowNav";
-// import styles from "../../../styles/carousel.module.css";
 
 interface CarouselProps {
     images: string[];
@@ -15,17 +14,20 @@ let count = 0;
 function Carousel({ images, slideInterval, backgroundColor }: CarouselProps) {
     const [currentIndex, setCurrentIndex] = useState(0);
 
-    function handleArrow(direction: string) {
-        if (direction === "l") {
-            count = (currentIndex + images.length - 1) % images.length;
-        }
+    const handleArrow = useCallback(
+        (direction: string) => {
+            if (direction === "l") {
+                count = (currentIndex + images.length - 1) % images.length;
+            }
 
-        if (direction === "r") {
-            count = (count + 1) % images.length;
-        }
+            if (direction === "r") {
+                count = (count + 1) % images.length;
+            }
 
-        setCurrentIndex(count);
-    }
+            setCurrentIndex(count);
+        },
+        [currentIndex, images.length]
+    );
 
     useEffect(() => {
         const intervalId = setInterval(() => {
@@ -45,7 +47,6 @@ function Carousel({ images, slideInterval, backgroundColor }: CarouselProps) {
                 <AiOutlineLeft />
             </ArrowNav>
             <div
-                // className={styles.wrapper}
                 className={`flex h-full transition-all duration-1000 ease-in-out`}
                 style={{
                     width: `${images.length * 100}vw`,
@@ -53,11 +54,7 @@ function Carousel({ images, slideInterval, backgroundColor }: CarouselProps) {
                 }}
             >
                 {images.map((img, i) => (
-                    <div
-                        // className={styles.imgContainer}
-                        className="relative h-full w-full"
-                        key={i}
-                    >
+                    <div className="relative h-full w-full" key={i}>
                         <Image
                             src={img}
                             alt=""

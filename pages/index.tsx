@@ -2,7 +2,7 @@ import type { GetServerSidePropsContext } from "next";
 import axios from "axios";
 import Layout from "../components/common/Layout";
 import Carousel from "../components/common/carousel";
-import PizzaList from "../components/home/PizzaList";
+import ProductList from "../components/home/ProductList";
 import { ProductProps } from "../utils/types";
 
 const images = [
@@ -19,7 +19,7 @@ const HomePage = ({ products }: { products: Array<ProductProps> }) => {
                 slideInterval={3000}
                 backgroundColor="bg-primary"
             />
-            <PizzaList products={products} />
+            <ProductList products={products} />
         </Layout>
     );
 };

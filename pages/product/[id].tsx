@@ -5,21 +5,6 @@ import axios from "axios";
 import Layout from "../../components/common/Layout";
 import { ProductProps } from "../../utils/types";
 
-// const pizza = {
-//     id: 1,
-//     img: "/images/pizza.png",
-//     name: "CAMPAGNOLA",
-//     price: [19.9, 23.9, 27.9],
-//     desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
-// };
-
-// const ingredients = [
-//     { id: 1, name: "double", desc: "Double Ingredients" },
-//     { id: 2, name: "cheese", desc: "Extra Cheese" },
-//     { id: 3, name: "spicy", desc: "Spicy Sauce" },
-//     { id: 4, name: "garlic", desc: "Garlic Sauce" },
-// ];
-
 function ProductPage({ product }: { product: ProductProps }) {
     const [price, setPrice] = useState(product.prices[0]);
     const [size, setSize] = useState(0);
@@ -55,9 +40,9 @@ function ProductPage({ product }: { product: ProductProps }) {
 
     return (
         <Layout title={product.title}>
-            <div className="mt-12 grid h-[calc(100vh-100px)] grid-cols-1 md:grid-cols-2">
-                <div className="flex-1 items-center justify-center">
-                    <div className="relative h-full w-full md:h-[80%] md:w-[80%]">
+            <div className="mt-12 mb-6 flex flex-col md:flex-row md:justify-between">
+                <div className="w-full">
+                    <div className="relative h-[65vw] w-[65vh] md:h-[90%] md:w-[90%]">
                         <Image
                             src={product.img}
                             alt={product.title}
@@ -66,14 +51,18 @@ function ProductPage({ product }: { product: ProductProps }) {
                         />
                     </div>
                 </div>
-                <div className="md: flex flex-1 flex-col justify-center px-5 md:justify-start">
-                    <h1 className="mb-4 text-2xl font-bold">{product.title}</h1>
-                    <span className="mb-6 text-lg font-[400] text-primary">
+                <div className="mt-6 flex w-full flex-col items-center md:mt-0 md:items-start">
+                    <h1 className="mb-4 text-3xl font-bold md:text-2xl">
+                        {product.title}
+                    </h1>
+                    <span className="mb-6 text-xl font-[400] text-primary md:text-lg">
                         RM {price}
                     </span>
-                    <p className="mb-4">{product.desc}</p>
-                    <h3 className="mb-4 font-bold">Choose the size</h3>
-                    <div className="mb-6 flex w-[40%] flex-row items-start justify-between">
+                    <p className="mb-4 text-base md:text-sm">{product.desc}</p>
+                    <h3 className="mb-4 text-lg font-bold md:text-base">
+                        Choose the size
+                    </h3>
+                    <div className="mb-6 flex w-full justify-between px-14 md:w-[40%] md:justify-between md:px-0">
                         <div
                             className="relative h-[30px] w-[30px] cursor-pointer"
                             onClick={() => changeSizeHandler(0)}
@@ -114,10 +103,10 @@ function ProductPage({ product }: { product: ProductProps }) {
                             </span>
                         </div>
                     </div>
-                    <h3 className="mb-2 font-bold">
+                    <h3 className="mb-2 text-lg font-bold md:text-base">
                         Choose additional ingredients
                     </h3>
-                    <div className="mb-5 flex flex-row gap-4">
+                    <div className="mb-5 flex flex-col gap-4 md:flex-row">
                         {product.extraOptions.map((option) => (
                             <div
                                 key={option._id}
