@@ -40,76 +40,123 @@ function CartPage() {
         <Layout title="Cart">
             <div className="grid grid-cols-1 gap-2 p-5 md:grid-cols-4">
                 <div className="col-span-3 overflow-x-auto">
-                    <table className="min-w-full">
-                        <thead>
-                            <tr className="border-b">
-                                <th className="py-2 px-2 text-left md:px-0">
-                                    Item
-                                </th>
-                                <th className="py-2 px-2 text-left md:px-0">
-                                    Extras
-                                </th>
-                                <th className="py-2 px-2 text-right md:px-0">
-                                    Price RM
-                                </th>
-                                <th className="py-2 px-2 text-right md:px-0">
-                                    Quantity
-                                </th>
-                                <th className="py-2 px-2 text-right md:px-0">
-                                    Total RM
-                                </th>
-                                <th className="p-2">Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {cartItems.map((item, i) => (
-                                <tr key={i} className="border-b">
-                                    <td className="pr-2 md:pr-0">
-                                        <Link href="#" passHref>
-                                            <a className="flex md:items-center">
-                                                <div className="relative hidden pt-2 md:block">
-                                                    <Image
-                                                        src={item.img}
-                                                        alt={item.name}
-                                                        width={40}
-                                                        height={40}
-                                                        className="rounded"
-                                                    />
-                                                </div>
-                                                &nbsp; <span>{item.name}</span>
-                                            </a>
-                                        </Link>
-                                    </td>
-                                    <td>
-                                        <ul className="list-disc pl-4">
-                                            {item.extras.map((extra, idx) => (
-                                                <li key={idx}>{extra}</li>
-                                            ))}
-                                        </ul>
-                                    </td>
-                                    <td className="px-2 text-right md:px-0">
-                                        {item.price.toFixed(2)}
-                                    </td>
-                                    <td className="px-2 text-right md:px-0">
-                                        <QuantityToggler
-                                            item={item}
-                                            onUpdate={() => null}
-                                        />
-                                    </td>
-                                    <td className="px-2 text-right md:px-0">
+                    <div className="hidden md:block">
+                        <table className="min-w-full">
+                            <thead>
+                                <tr className="border-b">
+                                    <th className="py-2 px-2 text-left md:px-0">
+                                        Item
+                                    </th>
+                                    <th className="py-2 px-2 text-left md:px-0">
+                                        Extras
+                                    </th>
+                                    <th className="py-2 px-2 text-right md:px-0">
+                                        Price RM
+                                    </th>
+                                    <th className="py-2 px-2 text-right md:px-0">
+                                        Quantity
+                                    </th>
+                                    <th className="py-2 px-2 text-right md:px-0">
+                                        Total RM
+                                    </th>
+                                    <th className="p-2">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {cartItems.map((item, i) => (
+                                    <tr key={i} className="border-b">
+                                        <td className="pr-2 md:pr-0">
+                                            <Link href="#" passHref>
+                                                <a className="flex md:items-center">
+                                                    <div className="relative hidden pt-2 md:block">
+                                                        <Image
+                                                            src={item.img}
+                                                            alt={item.name}
+                                                            width={40}
+                                                            height={40}
+                                                            className="rounded"
+                                                        />
+                                                    </div>
+                                                    &nbsp;{" "}
+                                                    <span>{item.name}</span>
+                                                </a>
+                                            </Link>
+                                        </td>
+                                        <td>
+                                            <ul className="list-disc pl-4">
+                                                {item.extras.map(
+                                                    (extra, idx) => (
+                                                        <li key={idx}>
+                                                            {extra}
+                                                        </li>
+                                                    )
+                                                )}
+                                            </ul>
+                                        </td>
+                                        <td className="px-2 text-right md:px-0">
+                                            {item.price.toFixed(2)}
+                                        </td>
+                                        <td className="px-2 text-right md:px-0">
+                                            <QuantityToggler
+                                                item={item}
+                                                onUpdate={() => null}
+                                            />
+                                        </td>
+                                        <td className="px-2 text-right md:px-0">
+                                            {(
+                                                item.price * item.quantity
+                                            ).toFixed(2)}
+                                        </td>
+                                        <td className="text-center text-red-500">
+                                            <button className=" hover:text-accent">
+                                                <AiOutlineCloseCircle size="1.5rem" />
+                                            </button>
+                                        </td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div className="flex flex-col items-center md:hidden">
+                        {cartItems.map((item, i) => (
+                            <div key={i} className="card mb-2 w-[90%] p-2">
+                                <h1 className="mb-2 text-center text-xl text-primary">
+                                    {item.name}
+                                </h1>
+                                <div className="mb-2 flex flex-row justify-between">
+                                    <div className="font-[500">Extras</div>
+                                    <ul className="list-disc pl-4">
+                                        {item.extras.map((extra, idx) => (
+                                            <li key={idx}>{extra}</li>
+                                        ))}
+                                    </ul>
+                                </div>
+                                <div className="mb-2 flex flex-row justify-between">
+                                    <div className="font-[500">Price</div>
+                                    <div>{item.price.toFixed(2)}</div>
+                                </div>
+                                <div className="mb-2 flex flex-row justify-between">
+                                    <div className="font-[500">Quantity</div>
+                                    <QuantityToggler
+                                        item={item}
+                                        onUpdate={() => null}
+                                    />
+                                </div>
+                                <div className="mb-4 flex flex-row justify-between">
+                                    <div className="font-[500">Total RM</div>
+                                    <div>
                                         {(item.price * item.quantity).toFixed(
                                             2
                                         )}
-                                    </td>
-                                    <td className="text-center text-red-500">
-                                        <button className=" hover:text-accent">
-                                            <AiOutlineCloseCircle size="1.5rem" />
-                                        </button>
-                                    </td>
-                                </tr>
-                            ))}
-                        </tbody>
-                    </table>
+                                    </div>
+                                </div>
+                                <button className="w-full rounded-lg bg-red-500 p-1 text-white">
+                                    Delete
+                                </button>
+                            </div>
+                        ))}
+                    </div>
                 </div>
                 <div>
                     <div className="card max-h-56 p-4">

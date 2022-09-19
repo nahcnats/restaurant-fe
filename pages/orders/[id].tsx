@@ -51,36 +51,62 @@ function OrderPage() {
         <Layout title="Order">
             <div className="grid grid-cols-1 gap-2 p-5 md:grid-cols-4">
                 <div className="col-span-3 overflow-x-auto">
-                    <table className="min-w-full">
-                        <thead>
-                            <tr className="border-b">
-                                <th className="py-2 px-2 text-left md:px-0">
-                                    Order ID
-                                </th>
-                                <th className="py-2 px-2 text-left md:px-0">
-                                    Customer
-                                </th>
-                                <th className="py-2 px-2 text-left md:px-0">
-                                    Address
-                                </th>
-                                <th className="py-2 px-2 text-right md:px-0">
-                                    Total RM
-                                </th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {orderItems.map((item, i) => (
-                                <tr key={i} className="border-b">
-                                    <td>{item.orderId}</td>
-                                    <td>{item.customer}</td>
-                                    <td>{item.address}</td>
-                                    <td className="px-2 text-right md:px-0">
-                                        {item.total.toFixed(2)}
-                                    </td>
+                    <div className="hidden md:block">
+                        <table className="min-w-full">
+                            <thead>
+                                <tr className="border-b">
+                                    <th className="py-2 px-2 text-left md:px-0">
+                                        Order ID
+                                    </th>
+                                    <th className="py-2 px-2 text-left md:px-0">
+                                        Customer
+                                    </th>
+                                    <th className="py-2 px-2 text-left md:px-0">
+                                        Address
+                                    </th>
+                                    <th className="py-2 px-2 text-right md:px-0">
+                                        Total RM
+                                    </th>
                                 </tr>
-                            ))}
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody>
+                                {orderItems.map((item, i) => (
+                                    <tr key={i} className="border-b">
+                                        <td>{item.orderId}</td>
+                                        <td>{item.customer}</td>
+                                        <td>{item.address}</td>
+                                        <td className="px-2 text-right md:px-0">
+                                            {item.total.toFixed(2)}
+                                        </td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div className="flex flex-col items-center md:hidden">
+                        {orderItems.map((item, i) => (
+                            <div key={i} className="card mb-2 w-[90%] p-2">
+                                <div className="mb-2 flex w-full justify-between">
+                                    <div className="font-[500]">Order ID</div>
+                                    <div>{item.orderId}</div>
+                                </div>
+                                <div className="mb-2 flex w-full justify-between">
+                                    <div className="font-[500]">Customer</div>
+                                    <div>{item.customer}</div>
+                                </div>
+                                <div className="mb-2 ">
+                                    <div className="font-[500]">Address</div>
+                                    <div>{item.address}</div>
+                                </div>
+                                <div className="flex w-full justify-between">
+                                    <div className="font-[500]">Total RM</div>
+                                    <div>{item.total.toFixed(2)}</div>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+
                     <div className="mt-6 flex w-full justify-between md:w-[80%]">
                         {statuses.map((item, index) => (
                             <div key={index} className={statusClass(index)}>
