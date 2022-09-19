@@ -86,7 +86,7 @@ function OrderPage() {
 
                     <div className="flex flex-col items-center md:hidden">
                         {orderItems.map((item, i) => (
-                            <div key={i} className="card mb-2 w-[90%] p-2">
+                            <div key={i} className="card mb-2 w-[86%] p-2">
                                 <div className="mb-2 flex w-full justify-between">
                                     <div className="font-[500]">Order ID</div>
                                     <div>{item.orderId}</div>

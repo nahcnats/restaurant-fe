@@ -32,7 +32,9 @@ export default function QuantityToggler({
             <div className="flex items-center justify-between">
                 <button
                     className={`rounded ${
-                        quantity === 1 ? "bg-gray-300" : "bg-red-500"
+                        quantity === 1
+                            ? "cursor-not-allowed bg-gray-300"
+                            : "bg-red-500"
                     }  p-2`}
                     onClick={decrementHandler}
                     disabled={quantity === 1 ? true : false}

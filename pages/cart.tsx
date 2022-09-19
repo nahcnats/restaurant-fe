@@ -120,7 +120,7 @@ function CartPage() {
 
                     <div className="flex flex-col items-center md:hidden">
                         {cartItems.map((item, i) => (
-                            <div key={i} className="card mb-2 w-[90%] p-2">
+                            <div key={i} className="card mb-2 w-[86%] p-2">
                                 <h1 className="mb-2 text-center text-xl text-primary">
                                     {item.name}
                                 </h1>
@@ -158,6 +158,7 @@ function CartPage() {
                         ))}
                     </div>
                 </div>
+
                 <div>
                     <div className="card max-h-56 p-4">
                         <h2 className="mb-2 text-lg font-semibold">
