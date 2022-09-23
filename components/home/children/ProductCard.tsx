@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { ProductProps } from "../../../utils/types";
 
-function PizzaCard({ item }: { item: ProductProps }) {
+function ProductCard({ item }: { item: ProductProps }) {
     return (
         <Link href={`/product/${item._id}`} passHref>
             <div className="card flex w-full cursor-pointer flex-col items-center justify-center p-[10px] md:w-[22%]">
@@ -27,4 +27,4 @@ function PizzaCard({ item }: { item: ProductProps }) {
     );
 }
 
-export default PizzaCard;
+export default ProductCard;
