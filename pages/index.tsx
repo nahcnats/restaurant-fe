@@ -5,6 +5,8 @@ import { ProductProps } from "../utils/types";
 import { getProducts } from "../services";
 import ProductCard from "../components/home/children/ProductCard";
 import Carousel from "../components/common/carousel";
+import Loader from "../components/common/Loader";
+import Error from "../components/common/Error";
 
 const images = [
     "/images/featured.png",
@@ -22,6 +24,14 @@ const HomePage = () => {
         refetchOnMount: false,
         refetchOnWindowFocus: false,
     });
+
+    if (isLoading) {
+        return <Loader isVisible={isLoading} />;
+    }
+
+    if (isError) {
+        return <Error message={String(error)} />;
+    }
 
     return (
         <Layout>
@@ -45,15 +55,9 @@ const HomePage = () => {
                     omnis.
                 </p>
                 <div className="flex w-full flex-wrap items-center justify-center gap-4">
-                    {isLoading ? (
-                        <div>Loading...</div>
-                    ) : isError ? (
-                        <div>{`Error encountered:  ${error}`}</div>
-                    ) : (
-                        products?.map((product) => (
-                            <ProductCard key={product._id} item={product} />
-                        ))
-                    )}
+                    {products?.map((product) => (
+                        <ProductCard key={product._id} item={product} />
+                    ))}
                 </div>
             </section>
         </Layout>

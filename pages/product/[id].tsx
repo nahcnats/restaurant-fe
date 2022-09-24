@@ -5,6 +5,8 @@ import { dehydrate, QueryClient, useQuery } from "react-query";
 import Layout from "../../components/common/Layout";
 import { ProductProps } from "../../utils/types";
 import { getProductById } from "../../services";
+import Loader from "../../components/common/Loader";
+import Error from "../../components/common/Error";
 
 function ProductPage({ id }: { id: string }) {
     const {
@@ -57,19 +59,11 @@ function ProductPage({ id }: { id: string }) {
     }
 
     if (isLoading) {
-        return (
-            <Layout>
-                <div>Loading...</div>
-            </Layout>
-        );
+        return <Loader isVisible={isLoading} />;
     }
 
     if (isError) {
-        return (
-            <Layout>
-                <div>{`Error encountered: ${error}`}</div>
-            </Layout>
-        );
+        return <Error message={String(error)} />;
     }
 
     return (
