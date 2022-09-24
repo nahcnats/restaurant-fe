@@ -11,6 +11,7 @@ function ProductCard({ item }: { item: ProductProps }) {
                     alt={item.title}
                     width="500"
                     height="500"
+                    priority
                 />
 
                 <h1 className="my-4 text-2xl font-bold text-primary md:text-xl">

@@ -1,7 +1,3 @@
-import axios from "axios";
+import { getProducts, getProductById } from "./products";
 
-const BASE_URL = process.env.BASE_URL || "/api";
-
-const server = axios.create({ baseURL: BASE_URL });
-
-export { server };
+export { getProducts, getProductById };

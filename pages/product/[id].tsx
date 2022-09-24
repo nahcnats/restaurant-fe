@@ -1,12 +1,23 @@
 import { GetServerSidePropsContext } from "next";
 import { useState } from "react";
 import Image from "next/image";
-import axios from "axios";
+import { dehydrate, QueryClient, useQuery } from "react-query";
 import Layout from "../../components/common/Layout";
 import { ProductProps } from "../../utils/types";
+import { getProductById } from "../../services";
 
-function ProductPage({ product }: { product: ProductProps }) {
-    const [price, setPrice] = useState(product.prices[0]);
+function ProductPage({ id }: { id: string }) {
+    const {
+        data: product,
+        isLoading,
+        isError,
+        error,
+    } = useQuery<ProductProps>("productsById", () => getProductById(id), {
+        refetchOnMount: false,
+        refetchOnWindowFocus: false,
+    });
+
+    const [price, setPrice] = useState(product?.prices[0] || 0);
     const [size, setSize] = useState(0);
     const [extras, setExtras] = useState<
         { _id: string; text: string; price: number }[]
@@ -17,8 +28,14 @@ function ProductPage({ product }: { product: ProductProps }) {
     }
 
     function changeSizeHandler(sizeIndex: number) {
-        const delta = product.prices[sizeIndex] - product.prices[size];
+        const delta =
+            product && product.prices[sizeIndex] - product?.prices[size];
         setSize(sizeIndex);
+
+        if (!delta) {
+            return;
+        }
+
         changePrice(delta);
     }
 
@@ -38,14 +55,30 @@ function ProductPage({ product }: { product: ProductProps }) {
         }
     }
 
+    if (isLoading) {
+        return (
+            <Layout>
+                <div>Loading...</div>
+            </Layout>
+        );
+    }
+
+    if (isError) {
+        return (
+            <Layout>
+                <div>{`Error encountered: ${error}`}</div>
+            </Layout>
+        );
+    }
+
     return (
-        <Layout title={product.title}>
+        <Layout title={product?.title}>
             <div className="mt-12 mb-6 flex flex-col md:flex-row md:justify-between">
                 <div className="w-full">
                     <div className="relative h-[65vw] w-[65vh] md:h-[90%] md:w-[90%]">
                         <Image
-                            src={product.img}
-                            alt={product.title}
+                            src={product?.img || ""}
+                            alt={product?.title}
                             layout="fill"
                             objectFit="contain"
                         />
@@ -53,12 +86,12 @@ function ProductPage({ product }: { product: ProductProps }) {
                 </div>
                 <div className="mt-6 flex w-full flex-col items-center md:mt-0 md:items-start">
                     <h1 className="mb-4 text-3xl font-bold md:text-2xl">
-                        {product.title}
+                        {product?.title}
                     </h1>
                     <span className="mb-6 text-xl font-[400] text-primary md:text-lg">
                         RM {price}
                     </span>
-                    <p className="mb-4 text-base md:text-sm">{product.desc}</p>
+                    <p className="mb-4 text-base md:text-sm">{product?.desc}</p>
                     <h3 className="mb-4 text-lg font-bold md:text-base">
                         Choose the size
                     </h3>
@@ -107,7 +140,7 @@ function ProductPage({ product }: { product: ProductProps }) {
                         Choose additional ingredients
                     </h3>
                     <div className="mb-5 flex flex-col gap-4 md:flex-row">
-                        {product.extraOptions.map((option) => (
+                        {product?.extraOptions.map((option) => (
                             <div
                                 key={option._id}
                                 className="font-[14px] flex items-center font-[500]"
@@ -146,15 +179,17 @@ function ProductPage({ product }: { product: ProductProps }) {
 export default ProductPage;
 
 export async function getServerSideProps(context: GetServerSidePropsContext) {
-    const { params } = context;
-    const NEXT_CROSS_ORIGIN = process.env.NEXT_CROSS_ORIGIN;
-    const res = await axios.get(
-        `${NEXT_CROSS_ORIGIN}/api/products/${params?.id}`
+    const id = context.params?.id as string;
+
+    const queryClient = new QueryClient();
+    await queryClient.prefetchQuery<ProductProps>("productById", () =>
+        getProductById(id)
     );
 
     return {
         props: {
-            product: res.data,
+            dehydratedState: dehydrate(queryClient),
+            id: id,
         },
     };
 }
