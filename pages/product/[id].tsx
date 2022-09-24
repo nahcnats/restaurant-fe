@@ -15,6 +15,7 @@ function ProductPage({ id }: { id: string }) {
     } = useQuery<ProductProps>("productsById", () => getProductById(id), {
         refetchOnMount: false,
         refetchOnWindowFocus: false,
+        enabled: id !== undefined,
     });
 
     const [price, setPrice] = useState(product?.prices[0] || 0);
