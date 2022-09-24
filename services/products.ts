@@ -1,12 +1,11 @@
-const BASE_URL =
-    process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000/api";
+import apiClient from "../utils/server";
 
 export async function getProducts() {
-    const data = await fetch(`${BASE_URL}/products`);
-    return data.json();
+    const response = await apiClient.get("/products");
+    return response.data;
 }
 
 export async function getProductById(id: string) {
-    const data = await fetch(`${BASE_URL}/products/${id}`);
-    return data.json();
+    const response = await apiClient.get(`/products/${id}`);
+    return response.data;
 }
