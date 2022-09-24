@@ -4,7 +4,7 @@ import Image from "next/image";
 import { dehydrate, QueryClient, useQuery } from "react-query";
 import Layout from "../../components/common/Layout";
 import { ProductProps } from "../../utils/types";
-import { getProductById } from "../../services";
+import { getProductById } from "../../services/products";
 import Loader from "../../components/common/Loader";
 import Error from "../../components/common/Error";
 

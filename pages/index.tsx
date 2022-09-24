@@ -2,7 +2,7 @@ import type { GetServerSidePropsContext } from "next";
 import { dehydrate, QueryClient, useQuery } from "react-query";
 import Layout from "../components/common/Layout";
 import { ProductProps } from "../utils/types";
-import { getProducts } from "../services";
+import { getProducts } from "../services/products";
 import ProductCard from "../components/home/children/ProductCard";
 import Carousel from "../components/common/carousel";
 import Loader from "../components/common/Loader";
